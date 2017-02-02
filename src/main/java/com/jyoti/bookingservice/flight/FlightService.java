@@ -9,18 +9,22 @@ public class FlightService {
 
     private Set<Flight> flights;
     private Map<Integer, FlightInventory> flightInventoryMap;
-    private String[] source = {"stockholm", "malmo", "copenhagen", "paris"};
-    private String[] destination = {"paris", "copenhagen", "malmo", "stockholm"};
+    private String[] source = {"stockholm", "malmo", "copenhagen", "paris", "berlin"};
+    private String[] destination = {"paris", "copenhagen", "malmo", "stockholm", "goteborg"};
 
     public FlightService() {
         flights = new HashSet<>();
         flightInventoryMap = new HashMap<>();
         int i = 0;
-        Flight flight1 = new Flight(++i, source[++i], destination[++i], "1", "1", "2017", 1111d);
-        Flight flight2 = new Flight(++i, source[++i], destination[++i], "2", "2", "2017", 2222d);
-        Flight flight3 = new Flight(++i, source[++i], destination[++i], "3", "3", "2017", 3333d);
-        Flight flight4 = new Flight(++i, source[++i], destination[++i], "4", "4", "2017", 4444d);
-        Flight flight5 = new Flight(++i, source[++i], destination[++i], "4", "4", "2017", 5555d);
+        Flight flight1 = new Flight(i, source[i], destination[i], "1", "1", "2017", 1111d);
+        ++i;
+        Flight flight2 = new Flight(i, source[i], destination[i], "2", "2", "2017", 2222d);
+        ++i;
+        Flight flight3 = new Flight(i, source[i], destination[i], "3", "3", "2017", 3333d);
+        ++i;
+        Flight flight4 = new Flight(i, source[i], destination[i], "4", "4", "2017", 4444d);
+        ++i;
+        Flight flight5 = new Flight(i, source[i], destination[i], "4", "4", "2017", 5555d);
 
         flights.add(flight1);
         flights.add(flight2);
