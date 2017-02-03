@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="http://ws.bookingservice.jyoti.com/" xmlns:tns="http://ws.bookingservice.jyoti.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="AuthenticationException" type="tns:AuthenticationException"/>
+
+  <xs:element name="bookTicket" type="tns:bookTicket"/>
+
+  <xs:element name="bookTicketResponse" type="tns:bookTicketResponse"/>
+
+  <xs:element name="createTicket" type="tns:createTicket"/>
+
+  <xs:element name="createTicketResponse" type="tns:createTicketResponse"/>
+
+  <xs:element name="login" type="tns:login"/>
+
+  <xs:element name="loginResponse" type="tns:loginResponse"/>
+
+  <xs:element name="searchItinerary" type="tns:searchItinerary"/>
+
+  <xs:element name="searchItineraryResponse" type="tns:searchItineraryResponse"/>
+
+  <xs:complexType name="bookTicket">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:string" minOccurs="0"/>
+      <xs:element name="arg1" type="xs:string" minOccurs="0"/>
+      <xs:element name="arg2" type="xs:string" minOccurs="0"/>
+      <xs:element name="arg3" type="tns:itinerary" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="itinerary">
+    <xs:sequence>
+      <xs:element name="departureCity" type="xs:string" minOccurs="0"/>
+      <xs:element name="destinationCity" type="xs:string" minOccurs="0"/>
+      <xs:element name="flights" type="tns:flight" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="flight">
+    <xs:sequence>
+      <xs:element name="day" type="xs:string" minOccurs="0"/>
+      <xs:element name="departureCity" type="xs:string" minOccurs="0"/>
+      <xs:element name="destinationCity" type="xs:string" minOccurs="0"/>
+      <xs:element name="flightId" type="xs:int"/>
+      <xs:element name="month" type="xs:string" minOccurs="0"/>
+      <xs:element name="price" type="xs:double" minOccurs="0"/>
+      <xs:element name="year" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="bookTicketResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AuthenticationException">
+    <xs:sequence>
+      <xs:element name="message" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="createTicket">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:string" minOccurs="0"/>
+      <xs:element name="arg1" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="createTicketResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:ticket" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ticket">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="searchItinerary">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:string" minOccurs="0"/>
+      <xs:element name="arg1" type="xs:string" minOccurs="0"/>
+      <xs:element name="arg2" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="searchItineraryResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:itinerary" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="login">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:string" minOccurs="0"/>
+      <xs:element name="arg1" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="loginResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+
