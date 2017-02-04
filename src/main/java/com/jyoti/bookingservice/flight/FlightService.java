@@ -1,9 +1,6 @@
 package com.jyoti.bookingservice.flight;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class FlightService {
 
@@ -12,9 +9,12 @@ public class FlightService {
     private String[] source = {"stockholm", "malmo", "copenhagen", "paris", "berlin"};
     private String[] destination = {"paris", "copenhagen", "malmo", "stockholm", "goteborg"};
 
+    private Map<String, Ticket> bookedTicketsMap;
+
     public FlightService() {
         flights = new HashSet<>();
         flightInventoryMap = new HashMap<>();
+        bookedTicketsMap = new HashMap<>();
         int i = 0;
         Flight flight1 = new Flight(i, source[i], destination[i], "1", "1", "2017", 1111d);
         ++i;
@@ -62,6 +62,7 @@ public class FlightService {
                             flightSearchResult.add(flight1);
                             flightSearchResult.add(flight2);
                             Itinerary itinerary = new Itinerary(departureCity, destinationCity, flightSearchResult);
+                            itinerarySearchResult.add(itinerary);
                         }
                     }
                 }
@@ -70,5 +71,47 @@ public class FlightService {
         }
 
         return itinerarySearchResult;
+    }
+
+    public String bookTicket(String travellerFullName, String creditCardNumber, Itinerary itinerary) throws SeatNotAvailableException {
+        Set<Flight> flights = itinerary.getFlights();
+        //check for seat availability
+        for (Flight flight : flights) {
+            int flightId = flight.getFlightId();
+            FlightInventory flightInventory = flightInventoryMap.get(flightId);
+
+            if (!flightInventory.isSeatAvailable()) {
+                throw new SeatNotAvailableException("Flight=" + flightId + " is fully booked. Not available");
+            }
+        }
+
+        //now updateInventory
+        for (Flight flight : flights) {
+            int flightId = flight.getFlightId();
+            FlightInventory flightInventory = flightInventoryMap.get(flightId);
+            flightInventory.bookSeat();
+        }
+
+        //now create ticket
+        UUID uuid = UUID.randomUUID();
+        Ticket t = new Ticket();
+        String ticketNumber = uuid.toString();
+        t.setTicketNumber(ticketNumber);
+        t.setTravellerName(travellerFullName);
+        t.setTotalPrice(itinerary.getTotalPrice());
+        t.setItinerary(itinerary);
+
+        //add it to map for future lookup
+        bookedTicketsMap.put(ticketNumber, t);
+        return ticketNumber;
+    }
+
+
+    public Ticket getTicketDetails(String ticketNumber) throws TicketNotFoundException {
+        Ticket s = bookedTicketsMap.get(ticketNumber);
+        if (s == null) {
+            throw new TicketNotFoundException("Ticket with ticketnumber " + ticketNumber + " not found");
+        }
+        return s;
     }
 }

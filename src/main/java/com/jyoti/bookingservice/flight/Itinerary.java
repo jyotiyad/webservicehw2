@@ -7,6 +7,7 @@ public class Itinerary {
     private String departureCity;
     private String destinationCity;
     private Set<Flight> flights;
+    private Double totalPrice = 0d;
 
     public Itinerary() {
     }
@@ -15,6 +16,10 @@ public class Itinerary {
         this.departureCity = departureCity;
         this.destinationCity = destinationCity;
         this.flights = flights;
+
+        for (Flight flight : flights) {
+            totalPrice = totalPrice+ flight.getPrice();
+        }
     }
 
     public String getDepartureCity() {
@@ -39,5 +44,9 @@ public class Itinerary {
 
     public void setFlights(Set<Flight> flights) {
         this.flights = flights;
+    }
+
+    public Double getTotalPrice() {
+        return totalPrice;
     }
 }

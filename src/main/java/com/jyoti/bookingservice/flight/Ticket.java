@@ -1,42 +1,43 @@
 package com.jyoti.bookingservice.flight;
 
-import java.util.Set;
-
 public class Ticket {
     private String ticketNumber;
+    private String travellerName;
     private Double totalPrice;
-    private String departureCity;
-    private String destinationCity;
-    private Set<Flight> flights;
+    private Itinerary itinerary;
 
     public Ticket() {
-    }
-
-    public Ticket(String ticketNumber, Double totalPrice, String departureCity, String destinationCity, Set<Flight> flights) {
-        this.ticketNumber = ticketNumber;
-        this.totalPrice = totalPrice;
-        this.departureCity = departureCity;
-        this.destinationCity = destinationCity;
-        this.flights = flights;
     }
 
     public String getTicketNumber() {
         return ticketNumber;
     }
 
+    public void setTicketNumber(String ticketNumber) {
+        this.ticketNumber = ticketNumber;
+    }
+
+    public String getTravellerName() {
+        return travellerName;
+    }
+
+    public void setTravellerName(String travellerName) {
+        this.travellerName = travellerName;
+    }
+
     public Double getTotalPrice() {
         return totalPrice;
     }
 
-    public String getDepartureCity() {
-        return departureCity;
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
-    public String getDestinationCity() {
-        return destinationCity;
+    public Itinerary getItinerary() {
+        return itinerary;
     }
 
-    public Set<Flight> getFlights() {
-        return flights;
+    public void setItinerary(Itinerary itinerary) {
+        this.itinerary = itinerary;
     }
 }

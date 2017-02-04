@@ -1,10 +1,8 @@
 package com.jyoti.bookingservice.ws;
 
-import com.jyoti.bookingservice.flight.FlightService;
-import com.jyoti.bookingservice.flight.Itinerary;
-import com.jyoti.bookingservice.flight.Ticket;
 import com.jyoti.bookingservice.auth.AuthenticationException;
 import com.jyoti.bookingservice.auth.AuthenticationService;
+import com.jyoti.bookingservice.flight.*;
 
 import javax.jws.WebService;
 import java.util.Set;
@@ -39,26 +37,31 @@ public class FlightBookingService {
         return flightService.searchFlights(departureCity, destinationCity);
     }
 
-    public String bookTicket(String token, String travellerFullName,
-                             String creditCardNumber, Itinerary itinerary) throws AuthenticationException {
+    public String bookTicket(String token, String travellerFullName, String creditCardNumber, Itinerary itinerary)
+            throws AuthenticationException, SeatNotAvailableException, InvalidCardDetailsException {
         boolean tokenValid = authService.validateToken(token);
         if (!tokenValid) {
             throw new AuthenticationException("Invalid Token");
         }
 
-        //TODO: book ticket, update inventry and return ticket number
+        if (creditCardNumber == null || creditCardNumber.length() > 0) {
+            throw new InvalidCardDetailsException("credit card number should always be provided");
+        }
 
-        return "TICKET";
+        String ticket = flightService.bookTicket(travellerFullName,
+                creditCardNumber, itinerary);
+
+        return ticket;
     }
 
-    public Ticket createTicket(String token, String ticketNumber) throws AuthenticationException {
+    public Ticket createTicket(String token, String ticketNumber) throws AuthenticationException, TicketNotFoundException {
         boolean tokenValid = authService.validateToken(token);
         if (!tokenValid) {
             throw new AuthenticationException("Invalid Token");
         }
 
-        //TODO: create ticket
+        Ticket ticket = flightService.getTicketDetails(ticketNumber);
 
-        return null;
+        return ticket;
     }
 }
