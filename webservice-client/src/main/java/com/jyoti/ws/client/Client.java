@@ -1,4 +1,4 @@
-package com.jyoti.bookingservice;
+package com.jyoti.ws.client;
 
 public class Client {
     private static String username = null;

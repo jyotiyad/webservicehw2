@@ -26,13 +26,13 @@
             </plugin>
 
             <plugin>
+                <!--http://stackoverflow.com/questions/23011547/webservice-client-generation-error-with-jdk8-->
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>jaxws-maven-plugin</artifactId>
                 <version>2.4.1</version>
                 <configuration>
                     <wsdlDirectory>${basedir}/src/main/resources/wsdl</wsdlDirectory>
-                    <packageName>com.raps.code.generate.ws</packageName>
-                    <!--<sourceDestDir>${basedir}/target/generated/src/main/java</sourceDestDir>-->
+                    <packageName>com.jyoti.ws.client</packageName>
                 </configuration>
                 <executions>
                     <execution>
