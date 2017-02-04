@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.util.Set;
 
 import com.jyoti.bookingservice.auth.AuthenticationService;
+import com.jyoti.bookingservice.flight.Flight;
 import com.jyoti.bookingservice.flight.FlightService;
 import com.jyoti.bookingservice.flight.Itinerary;
 
@@ -33,12 +34,31 @@ public class Client {
         System.out.println(dCity + "->");
         System.out.println("Enter Arrival City:");
         aCity = input.next();
-        System.out.println(dCity + "->" + aCity + "\n\n\n");
+        System.out.println(dCity + "->" + aCity + "\n");
 
         System.out.println("Available Flights:");
         FlightService fs = new FlightService();
         Set<Itinerary> flights = fs.searchFlights(dCity, aCity);
-
+        int i = 1;
+        for(Itinerary it : flights){
+            System.out.println("Choice #" + i );
+            Set<Flight> temp = it.getFlights();
+            String s = "";
+            int price = 0 ;
+            for(Flight f : temp ){
+                s += f.getDepartureCity() + "->" + f.getDestinationCity();
+                price += f.getPrice();
+            }
+           System.out.println(s);
+            System.out.println("Price: $" + price);
+        }
+        System.out.println("Enter your choice number: ");
+        int choice = input.nextInt();
+        while( choice > flights.size() || choice <= 0 ){
+            System.out.println("Invalid entry!");
+            System.out.println("Enter your choice number: ");
+            choice = input.nextInt();
+        }
 
     }
 
