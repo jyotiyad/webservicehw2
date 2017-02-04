@@ -16,15 +16,15 @@ public class FlightService {
         flightInventoryMap = new HashMap<>();
         bookedTicketsMap = new HashMap<>();
         int i = 0;
-        Flight flight1 = new Flight(i, source[i], destination[i], "1", "1", "2017", 1111d);
+        Flight flight1 = new Flight(i, source[i], destination[i], "2017-01-01", 1111d);
         ++i;
-        Flight flight2 = new Flight(i, source[i], destination[i], "2", "2", "2017", 2222d);
+        Flight flight2 = new Flight(i, source[i], destination[i], "2017-02-01", 2222d);
         ++i;
-        Flight flight3 = new Flight(i, source[i], destination[i], "3", "3", "2017", 3333d);
+        Flight flight3 = new Flight(i, source[i], destination[i], "2017-03-01", 3333d);
         ++i;
-        Flight flight4 = new Flight(i, source[i], destination[i], "4", "4", "2017", 4444d);
+        Flight flight4 = new Flight(i, source[i], destination[i], "2017-04-01", 4444d);
         ++i;
-        Flight flight5 = new Flight(i, source[i], destination[i], "4", "4", "2017", 5555d);
+        Flight flight5 = new Flight(i, source[i], destination[i], "2017-05-01", 5555d);
 
         flights.add(flight1);
         flights.add(flight2);
@@ -44,7 +44,7 @@ public class FlightService {
         for (Flight flight : flights) {
             if (flight.getDepartureCity().equals(departureCity)
                     && flight.getDestinationCity().equals(destinationCity)) {
-                Set<Flight> flightSearchResult = new HashSet<>();
+                List<Flight> flightSearchResult = new ArrayList<>();
                 flightSearchResult.add(flight);
                 Itinerary itinerary = new Itinerary(departureCity, destinationCity, flightSearchResult);
                 itinerarySearchResult.add(itinerary);
@@ -58,7 +58,7 @@ public class FlightService {
                     for (Flight flight2 : flights) {
                         if (flight2.getDestinationCity().equals(destinationCity)
                                 && flight2.getDepartureCity().equals(flight1.getDestinationCity())) {
-                            Set<Flight> flightSearchResult = new HashSet<>();
+                            List<Flight> flightSearchResult = new ArrayList<>();
                             flightSearchResult.add(flight1);
                             flightSearchResult.add(flight2);
                             Itinerary itinerary = new Itinerary(departureCity, destinationCity, flightSearchResult);
@@ -73,8 +73,36 @@ public class FlightService {
         return itinerarySearchResult;
     }
 
+    public Set<Itinerary> searchTicketAvailableFlights(String departureCity, String destinationCity, String date) {
+        Set<Itinerary> itinerarySearchResult = new HashSet<>();
+        Set<Itinerary> flightResult = searchFlights(departureCity, destinationCity);
+        //filter on date and availability
+        for (Itinerary itinerary : flightResult) {
+            List<Flight> flights = itinerary.getFlights();
+            //match departure date with first flight
+            if (flights.get(0).equals(date)) {
+                //check seat availability in all flights of itinerary
+                boolean available = true;
+                for (Flight flight : flights) {
+                    int flightId = flight.getFlightId();
+                    FlightInventory flightInventory = flightInventoryMap.get(flightId);
+                    if (!flightInventory.isSeatAvailable()) {
+                        available = false;
+                        break;
+                    }
+                }
+
+                if (available) {
+                    itinerarySearchResult.add(itinerary);
+                }
+            }
+        }
+
+        return itinerarySearchResult;
+    }
+
     public String bookTicket(String travellerFullName, String creditCardNumber, Itinerary itinerary) throws SeatNotAvailableException {
-        Set<Flight> flights = itinerary.getFlights();
+        List<Flight> flights = itinerary.getFlights();
         //check for seat availability
         for (Flight flight : flights) {
             int flightId = flight.getFlightId();
@@ -114,4 +142,6 @@ public class FlightService {
         }
         return s;
     }
+
+
 }

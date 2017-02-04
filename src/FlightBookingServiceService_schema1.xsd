@@ -3,6 +3,12 @@
 
   <xs:element name="AuthenticationException" type="tns:AuthenticationException"/>
 
+  <xs:element name="InvalidCardDetailsException" type="tns:InvalidCardDetailsException"/>
+
+  <xs:element name="SeatNotAvailableException" type="tns:SeatNotAvailableException"/>
+
+  <xs:element name="TicketNotFoundException" type="tns:TicketNotFoundException"/>
+
   <xs:element name="bookTicket" type="tns:bookTicket"/>
 
   <xs:element name="bookTicketResponse" type="tns:bookTicketResponse"/>
@@ -14,6 +20,10 @@
   <xs:element name="login" type="tns:login"/>
 
   <xs:element name="loginResponse" type="tns:loginResponse"/>
+
+  <xs:element name="searchAvailableItinerary" type="tns:searchAvailableItinerary"/>
+
+  <xs:element name="searchAvailableItineraryResponse" type="tns:searchAvailableItineraryResponse"/>
 
   <xs:element name="searchItinerary" type="tns:searchItinerary"/>
 
@@ -33,18 +43,17 @@
       <xs:element name="departureCity" type="xs:string" minOccurs="0"/>
       <xs:element name="destinationCity" type="xs:string" minOccurs="0"/>
       <xs:element name="flights" type="tns:flight" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="totalPrice" type="xs:double" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 
   <xs:complexType name="flight">
     <xs:sequence>
-      <xs:element name="day" type="xs:string" minOccurs="0"/>
       <xs:element name="departureCity" type="xs:string" minOccurs="0"/>
+      <xs:element name="departureDate" type="xs:string" minOccurs="0"/>
       <xs:element name="destinationCity" type="xs:string" minOccurs="0"/>
       <xs:element name="flightId" type="xs:int"/>
-      <xs:element name="month" type="xs:string" minOccurs="0"/>
       <xs:element name="price" type="xs:double" minOccurs="0"/>
-      <xs:element name="year" type="xs:string" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -55,6 +64,18 @@
   </xs:complexType>
 
   <xs:complexType name="AuthenticationException">
+    <xs:sequence>
+      <xs:element name="message" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="SeatNotAvailableException">
+    <xs:sequence>
+      <xs:element name="message" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="InvalidCardDetailsException">
     <xs:sequence>
       <xs:element name="message" type="xs:string" minOccurs="0"/>
     </xs:sequence>
@@ -74,7 +95,18 @@
   </xs:complexType>
 
   <xs:complexType name="ticket">
-    <xs:sequence/>
+    <xs:sequence>
+      <xs:element name="itinerary" type="tns:itinerary" minOccurs="0"/>
+      <xs:element name="ticketNumber" type="xs:string" minOccurs="0"/>
+      <xs:element name="totalPrice" type="xs:double" minOccurs="0"/>
+      <xs:element name="travellerName" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="TicketNotFoundException">
+    <xs:sequence>
+      <xs:element name="message" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
   </xs:complexType>
 
   <xs:complexType name="searchItinerary">
@@ -101,6 +133,21 @@
   <xs:complexType name="loginResponse">
     <xs:sequence>
       <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="searchAvailableItinerary">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:string" minOccurs="0"/>
+      <xs:element name="arg1" type="xs:string" minOccurs="0"/>
+      <xs:element name="arg2" type="xs:string" minOccurs="0"/>
+      <xs:element name="arg3" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="searchAvailableItineraryResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:itinerary" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 </xs:schema>

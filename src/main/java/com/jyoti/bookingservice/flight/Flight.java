@@ -4,18 +4,15 @@ public class Flight {
     private int flightId;
     private String departureCity;
     private String destinationCity;
-    private String day;
-    private String month;
-    private String year;
+    //format yyyy-mm-dd
+    private String departureDate;
     private Double price;
 
-    public Flight(int flightId, String departureCity, String destinationCity, String day, String month, String year, Double price) {
+    public Flight(int flightId, String departureCity, String destinationCity, String departureDate, Double price) {
         this.flightId = flightId;
         this.departureCity = departureCity;
         this.destinationCity = destinationCity;
-        this.day = day;
-        this.month = month;
-        this.year = year;
+        this.departureDate = departureDate;
         this.price = price;
     }
 
@@ -44,28 +41,12 @@ public class Flight {
         this.destinationCity = destinationCity;
     }
 
-    public String getDay() {
-        return day;
+    public String getDepartureDate() {
+        return departureDate;
     }
 
-    public void setDay(String day) {
-        this.day = day;
-    }
-
-    public String getMonth() {
-        return month;
-    }
-
-    public void setMonth(String month) {
-        this.month = month;
-    }
-
-    public String getYear() {
-        return year;
-    }
-
-    public void setYear(String year) {
-        this.year = year;
+    public void setDepartureDate(String departureDate) {
+        this.departureDate = departureDate;
     }
 
     public Double getPrice() {

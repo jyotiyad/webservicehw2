@@ -1,5 +1,6 @@
 package com.jyoti.bookingservice;
 
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -42,7 +43,7 @@ public class Client {
         int i = 1;
         for(Itinerary it : flights){
             System.out.println("Choice #" + i );
-            Set<Flight> temp = it.getFlights();
+            List<Flight> temp = it.getFlights();
             String s = "";
             int price = 0 ;
             for(Flight f : temp ){

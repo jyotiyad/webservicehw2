@@ -37,6 +37,15 @@ public class FlightBookingService {
         return flightService.searchFlights(departureCity, destinationCity);
     }
 
+    public Set<Itinerary> searchAvailableItinerary(String token, String departureCity, String destinationCity, String date) throws AuthenticationException {
+        boolean tokenValid = authService.validateToken(token);
+        if (!tokenValid) {
+            throw new AuthenticationException("Invalid Token");
+        }
+
+        return flightService.searchTicketAvailableFlights(departureCity, destinationCity, date);
+    }
+
     public String bookTicket(String token, String travellerFullName, String creditCardNumber, Itinerary itinerary)
             throws AuthenticationException, SeatNotAvailableException, InvalidCardDetailsException {
         boolean tokenValid = authService.validateToken(token);
