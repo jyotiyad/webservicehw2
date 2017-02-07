@@ -15,7 +15,7 @@ public class Client {
     private static String name = null;
     private static String card = null;
     private static String date = null;
-    private static URL url = getWSDLURL("http://localhost:8000/?wsdl");
+    private static URL url = getWSDLURL("http://localhost:8080/webservice-hw2/FlightBookingService?wsdl");
 
     public static void main(String[] args) throws AuthenticationException_Exception {
 
