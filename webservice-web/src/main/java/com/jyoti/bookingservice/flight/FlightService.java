@@ -6,8 +6,8 @@ public class FlightService {
 
     private Set<Flight> flights;
     private Map<Integer, FlightInventory> flightInventoryMap;
-    private String[] source = {"stockholm", "malmo", "copenhagen", "paris", "berlin"};
-    private String[] destination = {"paris", "copenhagen", "malmo", "stockholm", "goteborg"};
+    private String[] source = {"stockholm", "malmo", "copenhagen", "paris", "berlin", "paris"};
+    private String[] destination = {"paris", "copenhagen", "malmo", "stockholm", "goteborg", "berlin"};
 
     private Map<String, Ticket> bookedTicketsMap;
     public Map<Integer, FlightInventory> getflightInventoryMap(){
@@ -31,12 +31,15 @@ public class FlightService {
         Flight flight4 = new Flight(i, source[i], destination[i], "2017-04-01", 4444d);
         ++i;
         Flight flight5 = new Flight(i, source[i], destination[i], "2017-05-01", 5555d);
+        ++i;
+        Flight flight6 = new Flight(i, source[i], destination[i], "2017-01-01", 5555d);
 
         flights.add(flight1);
         flights.add(flight2);
         flights.add(flight3);
         flights.add(flight4);
         flights.add(flight5);
+        flights.add(flight6);
 
         flightInventoryMap.put(flight1.getFlightId(), new FlightInventory(flight1.getFlightId(), 10));
         flightInventoryMap.put(flight2.getFlightId(), new FlightInventory(flight2.getFlightId(), 10));
