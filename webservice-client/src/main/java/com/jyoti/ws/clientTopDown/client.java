@@ -3,7 +3,6 @@ package com.jyoti.ws.clientTopDown;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -22,7 +21,7 @@ public class client {
     private static String date = null;
     private static URL url = getWSDLURL("http://localhost:8000/?wsdl");
     private static List<Flight> flights ;
-    public static void main(String[] args) throws com.jyoti.bookingservice.auth.AuthenticationException, com.jyoti.ws.client.AuthenticationException_Exception {
+    public static void main(String[] args) throws com.jyoti.ws.client.AuthenticationException_Exception {
         // Test
 
         Flight f = new Flight();
