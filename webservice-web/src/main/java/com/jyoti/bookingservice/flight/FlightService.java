@@ -80,7 +80,7 @@ public class FlightService {
         for (Itinerary itinerary : flightResult) {
             List<Flight> flights = itinerary.getFlights();
             //match departure date with first flight
-            if (flights.get(0).equals(date)) {
+            if (flights.get(0).getDepartureDate().equals(date)) {
                 //check seat availability in all flights of itinerary
                 boolean available = true;
                 for (Flight flight : flights) {

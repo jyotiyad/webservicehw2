@@ -8,6 +8,9 @@ public class Flight {
     private String departureDate;
     private Double price;
 
+    public Flight(){
+
+    }
     public Flight(int flightId, String departureCity, String destinationCity, String departureDate, Double price) {
         this.flightId = flightId;
         this.departureCity = departureCity;

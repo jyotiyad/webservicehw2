@@ -53,7 +53,7 @@ public class FlightBookingService {
             throw new AuthenticationException("Invalid Token");
         }
 
-        if (creditCardNumber == null || creditCardNumber.length() > 0) {
+        if (creditCardNumber == null || creditCardNumber.length() < 0) {
             throw new InvalidCardDetailsException("credit card number should always be provided");
         }
 
@@ -73,4 +73,5 @@ public class FlightBookingService {
 
         return ticket;
     }
+
 }
