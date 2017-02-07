@@ -4,6 +4,8 @@ import com.jyoti.bookingservice.auth.AuthenticationException;
 import com.jyoti.bookingservice.auth.AuthenticationService;
 import com.jyoti.bookingservice.flight.*;
 
+import javax.jws.WebMethod;
+import javax.jws.WebParam;
 import javax.jws.WebService;
 import java.util.Set;
 
@@ -18,7 +20,9 @@ public class FlightBookingService {
         this.flightService = new FlightService();
     }
 
-    public String login(String username, String password) throws AuthenticationException {
+    @WebMethod
+    public String login(@WebParam(name = "username") String username,
+                        @WebParam(name = "password") String password) throws AuthenticationException {
         boolean isAuthenticated = authService.authenticateUser(username, password);
         if (isAuthenticated) {
             String token = authService.generateToken();
@@ -28,7 +32,10 @@ public class FlightBookingService {
         }
     }
 
-    public Set<Itinerary> searchItinerary(String token, String departureCity, String destinationCity) throws AuthenticationException {
+    @WebMethod
+    public Set<Itinerary> searchItinerary(@WebParam(name = "token") String token,
+                                          @WebParam(name = "departureCity") String departureCity,
+                                          @WebParam(name = "destinationCity") String destinationCity) throws AuthenticationException {
         boolean tokenValid = authService.validateToken(token);
         if (!tokenValid) {
             throw new AuthenticationException("Invalid Token");
@@ -37,7 +44,11 @@ public class FlightBookingService {
         return flightService.searchFlights(departureCity, destinationCity);
     }
 
-    public Set<Itinerary> searchAvailableItinerary(String token, String departureCity, String destinationCity, String date) throws AuthenticationException {
+    @WebMethod
+    public Set<Itinerary> searchAvailableItinerary(@WebParam(name = "token") String token,
+                                                   @WebParam(name = "departureCity") String departureCity,
+                                                   @WebParam(name = "destinationCity") String destinationCity,
+                                                   @WebParam(name = "date") String date) throws AuthenticationException {
         boolean tokenValid = authService.validateToken(token);
         if (!tokenValid) {
             throw new AuthenticationException("Invalid Token");
@@ -46,7 +57,11 @@ public class FlightBookingService {
         return flightService.searchTicketAvailableFlights(departureCity, destinationCity, date);
     }
 
-    public String bookTicket(String token, String travellerFullName, String creditCardNumber, Itinerary itinerary)
+    @WebMethod
+    public String bookTicket(@WebParam(name = "token") String token,
+                             @WebParam(name = "travellerFullName") String travellerFullName,
+                             @WebParam(name = "creditCardNumber") String creditCardNumber,
+                             @WebParam(name = "itinerary") Itinerary itinerary)
             throws AuthenticationException, SeatNotAvailableException, InvalidCardDetailsException {
         boolean tokenValid = authService.validateToken(token);
         if (!tokenValid) {
@@ -63,7 +78,9 @@ public class FlightBookingService {
         return ticket;
     }
 
-    public Ticket createTicket(String token, String ticketNumber) throws AuthenticationException, TicketNotFoundException {
+    @WebMethod
+    public Ticket createTicket(@WebParam(name = "token") String token,
+                               @WebParam(name = "ticketNumber") String ticketNumber) throws AuthenticationException, TicketNotFoundException {
         boolean tokenValid = authService.validateToken(token);
         if (!tokenValid) {
             throw new AuthenticationException("Invalid Token");
