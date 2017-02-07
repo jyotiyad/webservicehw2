@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="http://ws.bookingservice.jyoti.com/" xmlns:tns="http://ws.bookingservice.jyoti.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="AuthenticationException" type="tns:AuthenticationException"/>
+
+    <xs:element name="getPrice" type="tns:getPrice"/>
+
+    <xs:element name="getPriceResponse" type="tns:getPriceResponse"/>
+
+    <xs:element name="checkAvailable" type="tns:checkAvailable"/>
+
+    <xs:element name="checkAvailableResponse" type="tns:checkAvailableResponse"/>
+
+    <xs:element name="issueTicket" type="tns:issueTicket"/>
+
+    <xs:element name="issueTicketResponse" type="tns:issueTicketResponse"/>
+
+    <xs:complexType name="getPrice">
+        <xs:sequence>
+            <xs:element name="it" type="tns:itinerary" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="getPriceResponse">
+        <xs:sequence>
+            <xs:element name="return" type="tns:ticket" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="checkAvailable">
+        <xs:sequence>
+            <xs:element name="it" type="tns:itinerary" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="checkAvailableResponse">
+        <xs:sequence>
+            <xs:element name="return" type="tns:ticket" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="itinerary">
+        <xs:sequence>
+            <xs:element name="departureCity" type="xs:string" minOccurs="0"/>
+            <xs:element name="destinationCity" type="xs:string" minOccurs="0"/>
+            <xs:element name="flights" type="tns:flight" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="totalPrice" type="xs:double" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="flight">
+        <xs:sequence>
+            <xs:element name="departureCity" type="xs:string" minOccurs="0"/>
+            <xs:element name="departureDate" type="xs:string" minOccurs="0"/>
+            <xs:element name="destinationCity" type="xs:string" minOccurs="0"/>
+            <xs:element name="flightId" type="xs:int"/>
+            <xs:element name="price" type="xs:double" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="AuthenticationException">
+        <xs:sequence>
+            <xs:element name="message" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="issueTicket">
+        <xs:sequence>
+            <xs:element name="arg0" type="xs:string" minOccurs="0"/>
+            <xs:element name="arg1" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="issueTicketResponse">
+        <xs:sequence>
+            <xs:element name="return" type="tns:ticket" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ticket">
+        <xs:sequence>
+            <xs:element name="itinerary" type="tns:itinerary" minOccurs="0"/>
+            <xs:element name="ticketNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="totalPrice" type="xs:double" minOccurs="0"/>
+            <xs:element name="travellerName" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>
+

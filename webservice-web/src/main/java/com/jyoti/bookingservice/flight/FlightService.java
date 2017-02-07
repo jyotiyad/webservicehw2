@@ -10,6 +10,12 @@ public class FlightService {
     private String[] destination = {"paris", "copenhagen", "malmo", "stockholm", "goteborg"};
 
     private Map<String, Ticket> bookedTicketsMap;
+    public Map<Integer, FlightInventory> getflightInventoryMap(){
+        return this.flightInventoryMap;
+    };
+    public Map<String, Ticket> getBookedTicketsMap(){
+        return this.bookedTicketsMap;
+    }
 
     public FlightService() {
         flights = new HashSet<>();

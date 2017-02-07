@@ -6,7 +6,7 @@ import com.jyoti.bookingservice.ws.FlightBookingService;
  */
 public class FlightBookingServicePublisher {
     public static void main(String[] args) {
-        Endpoint.publish("http://localhost:8000/", new FlightBookingService());
+        Endpoint.publish("http://localhost:8000/", new FlightBookingService_topDown());
 
         System.out.println("The web service is published at http://localhost:8000/?wsdl");
 
