@@ -1,13 +1,10 @@
 package com.jyoti.ws.client;
 
-import com.jyoti.bookingservice.auth.AuthenticationException;
-import com.jyoti.bookingservice.ws.FlightBookingService;
-
+//import com.jyoti.bookingservice.auth.AuthenticationException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 
 public class Client {
     private static String username = null;
@@ -20,7 +17,7 @@ public class Client {
     private static String date = null;
     private static URL url = getWSDLURL("http://localhost:8000/?wsdl");
 
-    public static void main(String[] args) throws AuthenticationException, AuthenticationException_Exception {
+    public static void main(String[] args) throws AuthenticationException_Exception {
 
         FlightBookingServiceService service = new FlightBookingServiceService(url);
         com.jyoti.ws.client.FlightBookingService flightBookingService = service.getFlightBookingServicePort();
