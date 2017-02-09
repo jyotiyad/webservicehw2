@@ -31,10 +31,10 @@
 
   <xs:complexType name="bookTicket">
     <xs:sequence>
-      <xs:element name="arg0" type="xs:string" minOccurs="0"/>
-      <xs:element name="arg1" type="xs:string" minOccurs="0"/>
-      <xs:element name="arg2" type="xs:string" minOccurs="0"/>
-      <xs:element name="arg3" type="tns:itinerary" minOccurs="0"/>
+      <xs:element name="token" type="xs:string" minOccurs="0"/>
+      <xs:element name="travellerFullName" type="xs:string" minOccurs="0"/>
+      <xs:element name="creditCardNumber" type="xs:string" minOccurs="0"/>
+      <xs:element name="itinerary" type="tns:itinerary" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -83,8 +83,8 @@
 
   <xs:complexType name="createTicket">
     <xs:sequence>
-      <xs:element name="arg0" type="xs:string" minOccurs="0"/>
-      <xs:element name="arg1" type="xs:string" minOccurs="0"/>
+      <xs:element name="token" type="xs:string" minOccurs="0"/>
+      <xs:element name="ticketNumber" type="xs:string" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -111,9 +111,9 @@
 
   <xs:complexType name="searchItinerary">
     <xs:sequence>
-      <xs:element name="arg0" type="xs:string" minOccurs="0"/>
-      <xs:element name="arg1" type="xs:string" minOccurs="0"/>
-      <xs:element name="arg2" type="xs:string" minOccurs="0"/>
+      <xs:element name="token" type="xs:string" minOccurs="0"/>
+      <xs:element name="departureCity" type="xs:string" minOccurs="0"/>
+      <xs:element name="destinationCity" type="xs:string" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -125,8 +125,8 @@
 
   <xs:complexType name="login">
     <xs:sequence>
-      <xs:element name="arg0" type="xs:string" minOccurs="0"/>
-      <xs:element name="arg1" type="xs:string" minOccurs="0"/>
+      <xs:element name="username" type="xs:string" minOccurs="0"/>
+      <xs:element name="password" type="xs:string" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -138,10 +138,10 @@
 
   <xs:complexType name="searchAvailableItinerary">
     <xs:sequence>
-      <xs:element name="arg0" type="xs:string" minOccurs="0"/>
-      <xs:element name="arg1" type="xs:string" minOccurs="0"/>
-      <xs:element name="arg2" type="xs:string" minOccurs="0"/>
-      <xs:element name="arg3" type="xs:string" minOccurs="0"/>
+      <xs:element name="token" type="xs:string" minOccurs="0"/>
+      <xs:element name="departureCity" type="xs:string" minOccurs="0"/>
+      <xs:element name="destinationCity" type="xs:string" minOccurs="0"/>
+      <xs:element name="date" type="xs:string" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 
