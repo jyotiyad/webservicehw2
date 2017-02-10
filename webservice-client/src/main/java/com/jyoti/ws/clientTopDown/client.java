@@ -19,7 +19,7 @@ public class client {
     private static String name = null;
     private static String card = null;
     private static String date = null;
-    private static URL url = getWSDLURL("http://localhost:8000/?wsdl");
+    private static URL url = getWSDLURL("http://localhost:8000?wsdl");
     private static List<Flight> flights ;
     public static void main(String[] args) throws com.jyoti.ws.client.AuthenticationException_Exception {
         // Test
